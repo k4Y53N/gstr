@@ -81,10 +81,17 @@ class Element(ABC):
             if src is other:
                 continue
 
-            if len_srcs > 1:
-                links.append(f'{src.build(self)} ! {self.name}.')
+            src_element = None
+
+            if len(src.sinks) > 1:
+                src_element = f'{src.build(self)} {src.name}.'
             else:
-                links.append(f'{src.build(self)} ! {element}')
+                src_element = src.build(self)
+
+            if len_srcs > 1:
+                links.append(f'{src_element} ! {self.name}.')
+            else:
+                links.append(f'{src_element} ! {element}')
                 element_appeneded = True
 
         if not element_appeneded:
