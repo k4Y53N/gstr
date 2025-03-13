@@ -214,6 +214,10 @@ class RawElement(Element):
     def T(self) -> str:
         return self.E
 
+    @property
+    def name(self):
+        return self.E.upper()
+
     def get_properties(self) -> Dict[str, Any]:
         return self.properties
 
