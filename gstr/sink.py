@@ -20,5 +20,6 @@ class AutoVideoSink(GstBaseSink): ...
 
 
 @dataclass
-class FileSink(GstBaseSink):
+class FileSink(GstElement):
     location: str
+    sync: Optional[bool] = None
