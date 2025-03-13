@@ -6,6 +6,8 @@ __all__ = ['RawElement', 'GstElement']
 
 
 class Element(ABC):
+    """Abstract base class for all elements."""
+
     __srcs: Optional[List['Element']] = None
     __sinks: Optional[List['Element']] = None
 
@@ -20,6 +22,14 @@ class Element(ABC):
         return element
 
     def __or__(self, other: 'Element') -> 'Element':
+        """Connect two elements in series.
+
+        Args:
+            other (Element): The other element to connect.
+
+        Returns:
+            Element: The current element.
+        """
         if self.sinks:
             self.sinks[-1].__or__(other)
         else:
@@ -29,6 +39,14 @@ class Element(ABC):
         return self
 
     def __mul__(self, other: 'Element') -> 'Element':
+        """Connect two elements in parallel.
+
+        Args:
+            other (Element): The other element to connect.
+
+        Returns:
+            Element: The current element.
+        """
         self.sinks.append(other)
         other.srcs.append(self)
 
@@ -36,9 +54,21 @@ class Element(ABC):
 
     @abstractmethod
     def get_properties(self) -> Dict[str, Any]:
-        raise NotImplementedError()
+        """Get the properties of the element.
+
+        Returns:
+            Dict[str, Any]: The properties of the element.
+        """
 
     def build(self, other: Optional['Element'] = None) -> str:
+        """Build the element.
+
+        Args:
+            other (Optional[Element], optional): Element to skip build. Defaults to None.
+
+        Returns:
+            str: The built element.
+        """
         len_srcs = len(self.srcs)
         len_sinks = len(self.sinks)
         with_name = max(len_srcs, len_sinks) > 1
@@ -72,14 +102,29 @@ class Element(ABC):
         return ' '.join(links)
 
     def T(self) -> str:
+        """Get the element type.
+
+        Returns:
+            str: The element type.
+        """
         return self.__class__.__name__.lower()
 
     @property
     def name(self) -> Optional[str]:
+        """Get the name of the element.
+
+        Returns:
+            Optional[str]: The name of the element.
+        """
         return self.__class__.__name__.upper()
 
     @property
     def srcs(self) -> List['Element']:
+        """Get the sources of the element.
+
+        Returns:
+            List[Element]: The sources of the element.
+        """
         if self.__srcs is None:
             self.__srcs = []
 
@@ -87,12 +132,25 @@ class Element(ABC):
 
     @property
     def sinks(self) -> List['Element']:
+        """Get the sinks of the element.
+
+        Returns:
+            List[Element]: The sinks of the element.
+        """
         if self.__sinks is None:
             self.__sinks = []
 
         return self.__sinks
 
     def build_properties(self, with_name=False) -> List[str]:
+        """Build the properties of the element.
+
+        Args:
+            with_name (bool, optional): Add name property. Defaults to False.
+
+        Returns:
+            List[str]: The properties of the element.
+        """
         properties = self.get_properties()
 
         if with_name:
@@ -105,15 +163,36 @@ class Element(ABC):
         ]
 
     def separate(self) -> str:
+        """Get the separator for the element.
+
+        Returns:
+            str: The separator for the element.
+        """
         return ' '
 
     def clean_property_key(self, key: str) -> str:
+        """Clean the property key. If the key starts with an underscore, it will be removed. All underscores will be replaced with hyphens.
+
+        Args:
+            key (str): The property key.
+
+        Returns:
+            str: The cleaned property key.
+        """
         if key.startswith('_'):
             key = key[1:]
 
         return str(key).replace('_', '-')
 
     def clean_property_value(self, value: Any) -> str:
+        """Clean the property value. If the value is a boolean, it will be converted to a string.
+
+        Args:
+            value (Any): The property value.
+
+        Returns:
+            str: The cleaned property value.
+        """
         if isinstance(value, bool):
             return str(value).lower()
 
