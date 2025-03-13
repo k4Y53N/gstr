@@ -4,21 +4,12 @@ from typing import Literal, Optional
 from .caps import GstBaseCaps
 from .element import GstElement
 
-__all__ = ['CapsFilter', 'FakeSink', 'FileSink', 'FileSrc', 'Queue', 'Tee']
+__all__ = ['CapsFilter', 'FileSrc', 'Queue', 'Tee']
 
 
 @dataclass
 class CapsFilter(GstElement):
     caps: GstBaseCaps
-
-
-@dataclass
-class FakeSink(GstElement): ...
-
-
-@dataclass
-class FileSink(GstElement):
-    location: str
 
 
 @dataclass
