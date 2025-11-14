@@ -129,7 +129,7 @@ class Element(ABC):
         return unique_name
 
     def __build_element(self) -> str:
-        return f'{self.T()} {self.__build_properties()}'
+        return f'{self.T()} {self.__build_properties()}'.strip()
 
     def __build_properties(self) -> str:
         properties = {
