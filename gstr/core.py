@@ -6,6 +6,8 @@ from .element import GstElement
 __all__ = [
     'Queue',
     'Tee',
+    'FileSrc',
+    'FileSink',
 ]
 
 
@@ -16,3 +18,13 @@ class Queue(GstElement):
 
 @dataclass
 class Tee(GstElement): ...
+
+
+@dataclass
+class FileSrc:
+    location: str
+
+
+@dataclass
+class FileSink:
+    location: str
