@@ -5,5 +5,6 @@ from .element import *  # noqa
 from .flv import *  # noqa
 from .h264 import *  # noqa
 from .playback import *  # noqa
+from .rtmp import *  # noqa
 from .rtsp import *  # noqa
 from .videoconvertscale import *  # noqa
