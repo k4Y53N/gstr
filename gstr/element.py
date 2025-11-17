@@ -3,6 +3,7 @@ from dataclasses import asdict, dataclass
 from typing import Any, Union
 
 __all__ = [
+    'Element',
     'RawElement',
     'GstElement',
 ]
