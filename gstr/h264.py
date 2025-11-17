@@ -5,7 +5,7 @@ from .element import GstElement
 
 __all__ = [
     'H264Parse',
-    'AVDEC_H264',
+    'AVDec_H264',
     'X264Enc',
     'RTPH264Depay',
 ]
@@ -16,7 +16,7 @@ class H264Parse(GstElement): ...
 
 
 @dataclass
-class AVDEC_H264(GstElement): ...
+class AVDec_H264(GstElement): ...
 
 
 @dataclass
