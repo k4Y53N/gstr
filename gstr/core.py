@@ -13,7 +13,7 @@ __all__ = [
 
 @dataclass
 class Queue(GstElement):
-    leaky: Literal['no', 'upstream', 'downstream'] = 'no'
+    leaky: Literal['no', 'upstream', 'downstream'] | None = None
 
 
 @dataclass

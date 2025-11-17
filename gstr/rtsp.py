@@ -11,4 +11,4 @@ __all__ = [
 @dataclass
 class RTSPSrc(GstElement):
     location: str
-    protocols: Literal['tcp', 'udp', 'udp-mcast' 'tcp+udp-mcast+udp'] = 'tcp'
+    protocols: Literal['tcp', 'udp', 'udp-mcast' 'tcp+udp-mcast+udp'] | None = None
