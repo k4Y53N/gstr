@@ -2,6 +2,7 @@ from .app import *  # noqa
 from .caps import *  # noqa
 from .core import *  # noqa
 from .element import *  # noqa
+from .flv import *  # noqa
 from .h264 import *  # noqa
 from .playback import *  # noqa
 from .rtsp import *  # noqa
