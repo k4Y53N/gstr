@@ -21,10 +21,10 @@ class Tee(GstElement): ...
 
 
 @dataclass
-class FileSrc:
+class FileSrc(GstElement):
     location: str
 
 
 @dataclass
-class FileSink:
+class FileSink(GstElement):
     location: str
