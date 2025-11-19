@@ -7,7 +7,6 @@ __all__ = [
     'H264Parse',
     'AVDec_H264',
     'X264Enc',
-    'RTPH264Depay',
 ]
 
 
@@ -40,7 +39,3 @@ class X264Enc(GstElement):
         | None
     ) = None
     tune: Literal['stillimage', 'fastdecode', 'zerolatency'] | None = None
-
-
-@dataclass
-class RTPH264Depay(GstElement): ...
