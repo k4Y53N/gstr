@@ -8,6 +8,10 @@ __all__ = [
     'Tee',
     'FileSrc',
     'FileSink',
+    'FDSrc',
+    'FDSink',
+    'FakeSrc',
+    'FakeSink',
 ]
 
 
@@ -28,3 +32,19 @@ class FileSrc(GstElement):
 @dataclass
 class FileSink(GstElement):
     location: str
+
+
+@dataclass
+class FDSrc(GstElement): ...
+
+
+@dataclass
+class FDSink(GstElement): ...
+
+
+@dataclass
+class FakeSrc(GstElement): ...
+
+
+@dataclass
+class FakeSink(GstElement): ...
