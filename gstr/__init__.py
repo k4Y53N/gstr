@@ -5,6 +5,7 @@ from .element import *  # noqa
 from .flv import *  # noqa
 from .h264 import *  # noqa
 from .isomp4 import *  # noqa
+from .pango import *  # noqa
 from .playback import *  # noqa
 from .rtmp import *  # noqa
 from .rtp import *  # noqa
