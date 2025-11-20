@@ -18,15 +18,24 @@ class TextOverlay(GstElement):
     auto_resize: bool | None = None
     scale_mode: Literal['none', 'par', 'display', 'user'] | None = None
     scale_pixel_aspect_ratio: int | float | str | None = None
-    halignment: Literal['left', 'center', 'right', 'position', 'absolute'] | None = None
+    halignment: (
+        Literal[
+            'left',
+            'center',
+            'right',
+            'Absolute position clamped to canvas',
+            'Absolute position',
+        ]
+        | None
+    ) = None
     valignment: (
         Literal[
             'baseline',
             'bottom',
             'top',
-            'position',
+            'Absolute position clamped to canvas',
             'center',
-            'absolute',
+            'Absolute position',
         ]
         | None
     ) = None
