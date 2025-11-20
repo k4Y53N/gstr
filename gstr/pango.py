@@ -18,10 +18,6 @@ class TextOverlay(GstElement):
     auto_resize: bool | None = None
     scale_mode: Literal['none', 'par', 'display', 'user'] | None = None
     scale_pixel_aspect_ratio: int | float | str | None = None
-    text_x: int | None = None
-    text_y: int | None = None
-    text_width: int | None = None
-    text_height: int | None = None
     halignment: Literal['left', 'center', 'right', 'position', 'absolute'] | None = None
     valignment: (
         Literal[
