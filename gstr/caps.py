@@ -1,8 +1,8 @@
 from dataclasses import asdict, dataclass
-from fractions import Fraction
 from typing import Any
 
 from .element import Element
+from .util import get_numer_denom_str
 
 __all__ = [
     'Caps',
@@ -11,13 +11,6 @@ __all__ = [
     'RawVideoCaps',
     'RawVideoBGRCaps',
 ]
-
-
-def get_numer_denom_str(framerate: float) -> str:
-    frac = Fraction(framerate).limit_denominator()
-    numer, denom = frac.numerator, frac.denominator
-
-    return f'{numer}/{denom}'
 
 
 class Caps(Element):
