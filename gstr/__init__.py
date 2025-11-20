@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from .app import *  # noqa
+from .autodetect import *  # noqa
 from .caps import *  # noqa
 from .core import *  # noqa
 from .element import *  # noqa
