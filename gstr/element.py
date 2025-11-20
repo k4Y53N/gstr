@@ -154,7 +154,12 @@ class Element(ABC):
         if isinstance(value, bool):
             return str(value).lower()
 
-        return str(value)
+        value = str(value).strip()
+
+        if ' ' in value:
+            return f'"{value}"'
+
+        return value
 
 
 class RawElement(Element):
