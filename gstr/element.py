@@ -130,16 +130,14 @@ class Element(ABC):
         return unique_name
 
     def __build_element(self) -> str:
-        return self.separate().join([self.T(), self.__build_properties()]).strip()
+        return self.separate().join([self.T(), *self.__build_properties()])
 
-    def __build_properties(self) -> str:
-        properties = {
-            self.__clean_key(k): self.__clean_value(v)
+    def __build_properties(self) -> list[str]:
+        return [
+            f'{self.__clean_key(k)}={self.__clean_value(v)}'
             for k, v in self.get_properties().items()
             if v is not None
-        }
-
-        return self.separate().join([f'{k}={v}' for k, v in properties.items()])
+        ]
 
     def separate(self):
         return ' '
