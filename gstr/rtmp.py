@@ -3,28 +3,28 @@ from dataclasses import dataclass
 from .element import GstElement
 
 __all__ = [
-    'RTMPSrc',
-    'RTMPSink',
-    'RTMP2Src',
-    'RTMP2Sink',
+    'RtmpSrc',
+    'RtmpSink',
+    'Rtmp2Src',
+    'Rtmp2Sink',
 ]
 
 
 @dataclass
-class RTMPSrc(GstElement):
+class RtmpSrc(GstElement):
     location: str
 
 
 @dataclass
-class RTMPSink(GstElement):
+class RtmpSink(GstElement):
     location: str
 
 
 @dataclass
-class RTMP2Src(GstElement):
+class Rtmp2Src(GstElement):
     location: str
 
 
 @dataclass
-class RTMP2Sink(GstElement):
+class Rtmp2Sink(GstElement):
     location: str

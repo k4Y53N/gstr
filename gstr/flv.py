@@ -3,14 +3,14 @@ from dataclasses import dataclass
 from .element import GstElement
 
 __all__ = [
-    'FLVMux',
-    'FLVDemux',
+    'FlvMux',
+    'FlvDemux',
 ]
 
 
 @dataclass
-class FLVMux(GstElement): ...
+class FlvMux(GstElement): ...
 
 
 @dataclass
-class FLVDemux(GstElement): ...
+class FlvDemux(GstElement): ...

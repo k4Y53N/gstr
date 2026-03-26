@@ -4,18 +4,18 @@ from typing import Literal
 from .element import GstElement
 
 __all__ = [
-    'RTSPSrc',
-    'RTSPClientSink',
+    'RtspSrc',
+    'RtspClientSink',
 ]
 
 
 @dataclass
-class RTSPSrc(GstElement):
+class RtspSrc(GstElement):
     location: str
     protocols: Literal['tcp', 'udp', 'udp-mcast' 'tcp+udp-mcast+udp'] | None = None
 
 
 @dataclass
-class RTSPClientSink(GstElement):
+class RtspClientSink(GstElement):
     location: str
     protocols: Literal['tcp', 'udp', 'udp-mcast' 'tcp+udp-mcast+udp'] | None = None

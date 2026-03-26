@@ -5,8 +5,8 @@ from .element import GstElement
 __all__ = [
     'DecodeBin',
     'DecodeBin3',
-    'URIDecodeBin',
-    'URIDecodeBin3',
+    'UriDecodeBin',
+    'UriDecodeBin3',
 ]
 
 
@@ -19,10 +19,10 @@ class DecodeBin3(GstElement): ...
 
 
 @dataclass
-class URIDecodeBin(GstElement):
+class UriDecodeBin(GstElement):
     uri: str
 
 
 @dataclass
-class URIDecodeBin3(GstElement):
+class UriDecodeBin3(GstElement):
     uri: str

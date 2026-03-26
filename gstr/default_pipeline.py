@@ -9,7 +9,7 @@ def rtsp_to_app(
     fps: int | float | str | None = None,
 ) -> str:
     pipeline = (
-        g.RTSPSrc(location=location, protocols=protocols)
+        g.RtspSrc(location=location, protocols=protocols)
         | g.DecodeBin()
         | g.VideoConvert()
     )
@@ -26,7 +26,7 @@ def rtmp_to_app(
     location: str,
     fps: int | float | str | None = None,
 ) -> str:
-    pipeline = g.RTMPSrc(location=location) | g.DecodeBin() | g.VideoConvert()
+    pipeline = g.RtmpSrc(location=location) | g.DecodeBin() | g.VideoConvert()
 
     if fps is not None:
         pipeline | g.VideoRate(drop_only=True)
