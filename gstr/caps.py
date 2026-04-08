@@ -1,37 +1,26 @@
-from dataclasses import asdict, dataclass
-from typing import Any
+from dataclasses import dataclass
 
-from .element import Element
+from .element import GstElement, RawElement
 from .util import get_numer_denom_str
 
 __all__ = [
-    'Caps',
     'RawCaps',
-    'GstCaps',
+    'VideoCaps',
     'RawVideoCaps',
     'RawVideoBGRCaps',
 ]
 
 
-class Caps(Element):
-    def separate(self) -> str:
+class RawCaps(RawElement):
+    def __init__(self, E: str, **kwargs):
+        super().__init__(E, **kwargs)
+
+    def separate(self):
         return ','
 
 
 @dataclass
-class RawCaps(Caps):
-    C: str
-    properties: dict[str, Any] = None
-
-    def T(self) -> str:
-        return self.C
-
-    def get_properties(self):
-        return self.properties
-
-
-@dataclass
-class CapsMeta:
+class VideoCaps(GstElement):
     width: int | None = None
     height: int | None = None
     framerate: int | float | str | None = None
@@ -41,15 +30,12 @@ class CapsMeta:
         if isinstance(self.framerate, (int, float)):
             self.framerate = get_numer_denom_str(self.framerate)
 
-
-@dataclass
-class GstCaps(Caps, CapsMeta):
-    def get_properties(self):
-        return asdict(self)
+    def separate(self):
+        return ','
 
 
 @dataclass
-class RawVideoCaps(GstCaps):
+class RawVideoCaps(VideoCaps):
     def T(self) -> str:
         return 'video/x-raw'
 
