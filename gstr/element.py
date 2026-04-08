@@ -49,14 +49,17 @@ class Element(ABC):
 
         return self
 
-    def T(self) -> str:
-        return self.__class__.__name__.lower()
-
     @abstractmethod
     def as_element(self, instance: 'Element | str') -> 'Element': ...
 
     @abstractmethod
     def get_properties(self) -> dict[str, Any]: ...
+
+    def T(self) -> str:
+        return self.__class__.__name__.lower()
+
+    def separate(self):
+        return ' '
 
     @property
     def name(self) -> str:
@@ -157,9 +160,6 @@ class Element(ABC):
             for k, v in self.get_properties().items()
             if v is not None
         ]
-
-    def separate(self):
-        return ' '
 
     def __clean_key(self, key: str) -> str:
         if key.startswith('_'):
