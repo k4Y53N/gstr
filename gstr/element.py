@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import asdict, dataclass
-from typing import Any, Union
+from typing import Any, Union, overload
 
 __all__ = [
     'Element',
@@ -19,7 +19,15 @@ class Element(ABC):
     def __str__(self):
         return self.__build_element()
 
-    def __or__(self, other: 'Element') -> 'Element':
+    @overload
+    def __or__(self, other: 'Element') -> 'Element': ...
+
+    @overload
+    def __or__(self, other: str) -> 'Element': ...
+
+    def __or__(self, other: 'Element | str') -> 'Element':
+        other = self.as_element(other)
+
         if len(self.sinks):
             self.sinks[0].__or__(other)
         else:
@@ -27,7 +35,15 @@ class Element(ABC):
 
         return self
 
-    def __mul__(self, other: 'Element'):
+    @overload
+    def __mul__(self, other: 'Element') -> 'Element': ...
+
+    @overload
+    def __mul__(self, other: str) -> 'Element': ...
+
+    def __mul__(self, other: 'Element | str') -> 'Element':
+        other = self.as_element(other)
+
         self.sinks.append(other)
         other.srcs.append(self)
 
@@ -35,6 +51,9 @@ class Element(ABC):
 
     def T(self) -> str:
         return self.__class__.__name__.lower()
+
+    @abstractmethod
+    def as_element(self, instance: 'Element | str') -> 'Element': ...
 
     @abstractmethod
     def get_properties(self) -> dict[str, Any]: ...
@@ -168,11 +187,23 @@ class RawElement(Element):
     def T(self):
         return self.E
 
+    def as_element(self, instance: Element | str) -> Element:
+        if isinstance(instance, Element):
+            return instance
+
+        return RawElement(instance)
+
     def get_properties(self):
         return self.properties
 
 
 @dataclass
 class GstElement(Element):
+    def as_element(self, instance: Element | str) -> Element:
+        if isinstance(instance, Element):
+            return instance
+
+        return RawElement(instance)
+
     def get_properties(self):
         return asdict(self)
