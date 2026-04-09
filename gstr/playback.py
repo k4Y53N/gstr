@@ -8,6 +8,7 @@ __all__ = [
     'UriDecodeBin',
     'UriDecodeBin3',
     'ParseBin',
+    'UriSourceBin',
 ]
 
 
@@ -31,3 +32,8 @@ class UriDecodeBin3(GstElement):
 
 @dataclass
 class ParseBin(GstElement): ...
+
+
+@dataclass
+class UriSourceBin(GstElement):
+    uri: str
